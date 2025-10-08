@@ -26,6 +26,8 @@ const COMPANY_NAME = (process.env.SIMPRO_COMPANY_NAME || '').trim();
 
 function reqFail(msg, res, code=500) {
   if (typeof msg === 'object') msg = JSON.stringify(msg);
+    console.error('reqFail:', msg);
+
   return res.status(code).json({ ok:false, error:String(msg) });
 }
 
@@ -87,6 +89,8 @@ app.post('/api/quote-runs/commit', async (req, res) => {
     return res.json({ ok:true, connected:true, companyId });
   } catch (e) {
     const msg = e?.response?.data || e?.message || e;
+        console.error('Commit error:', e);
+
     return reqFail(msg, res);
   }
 });
