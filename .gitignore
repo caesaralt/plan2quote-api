@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log*
+dist
+.env
+.env.local
+.tmp
+coverage
+.next
+apps/api/data/*.db*
+apps/api/data/*.sqlite
+apps/api/data/*.sqlite3
