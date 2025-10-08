@@ -6,6 +6,14 @@ import express from 'express';
 import cors from 'cors';
 import axios from 'axios';
 
+// Log unhandled errors so the process doesn't silently die.
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Rejection:', err);
+});
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
 const app = express();
 app.use(cors({ origin: '*' }));              // lock this down after demo
 app.use(express.json({ limit: '25mb' }));
@@ -65,6 +73,11 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Respond to GET with 405; this endpoint expects a POST
+app.get('/api/quote-runs/commit', (req, res) => {
+  res.status(405).json({ ok: false, error: 'Use POST for this endpoint.' });
+});
+
 // For the demo: prove OAuth + company detection. Next step will create a Draft Quote.
 app.post('/api/quote-runs/commit', async (req, res) => {
   try {
@@ -78,5 +91,5 @@ app.post('/api/quote-runs/commit', async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Plan2Quote API listening on ${port}`));
