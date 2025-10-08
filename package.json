@@ -2,10 +2,11 @@
   "name": "plan2quote-api",
   "version": "1.0.0",
   "type": "module",
-  "  "engines": { "node": ">=18.17 <23" },
-scripts": {
-    
-"start": "node server.js"
+  "engines": {
+    "node": ">=18.17 <23"
+  },
+  "scripts": {
+    "start": "node server.js"
   },
   "dependencies": {
     "axios": "^1.7.2",
