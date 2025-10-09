@@ -1,0 +1,19 @@
+{
+  "name": "plan2quote-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "node -e \"console.log('build step not required for api')\"",
+    "start": "node src/index.js",
+    "lint": "node -e \"console.log('lint skipped')\"",
+    "test": "NODE_ENV=test DEFAULT_MARGIN_PERCENT=15 MIN_CALLOUT_FEE_EX_GST=0 node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "pdfkit": "^0.15.0"
+  }
+}
