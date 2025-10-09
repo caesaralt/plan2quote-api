@@ -6,7 +6,7 @@ export const getSimproToken = async () => {
   const tokenUrl = process.env.SIMPRO_TOKEN_URL;
   const clientId = process.env.SIMPRO_CLIENT_ID;
   const clientSecret = process.env.SIMPRO_CLIENT_SECRET;
-  const scopes = process.env.SIMPRO_SCOPES || '';
+  const scopes = (process.env.SIMPRO_SCOPES || '').trim();
 
   if (!tokenUrl || !clientId || !clientSecret) {
     throw new Error('Missing SIMPRO_* envs');
@@ -17,7 +17,10 @@ export const getSimproToken = async () => {
     return cached.access_token;
   }
 
-  const body = new URLSearchParams({ grant_type: 'client_credentials', scope: scopes });
+  const body = new URLSearchParams({ grant_type: 'client_credentials' });
+  if (scopes.length > 0) {
+    body.set('scope', scopes);
+  }
   const auth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
   const res = await fetch(tokenUrl, {

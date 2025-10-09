@@ -81,7 +81,7 @@ Required envs (set in `.env`):
 - SIMPRO_TOKEN_URL=https://integratd.simprosuite.com/oauth2/token
 - SIMPRO_API_BASE=https://integratd.simprosuite.com    (the tenant base; the client appends /api/v1.0)
 - SIMPRO_CLIENT_ID, SIMPRO_CLIENT_SECRET
-- SIMPRO_SCOPES (space-delimited)
+- SIMPRO_SCOPES (space-delimited; leave blank if your tenant does not require scopes)
 - SIMPRO_COMPANY_ID (optional; auto-resolves via /companies if omitted)
 
 The frontend never sees secrets; it calls the backend at NEXT_PUBLIC_API_BASE_URL.
@@ -94,7 +94,7 @@ npm run test --workspace=apps/api
 
 ## Deployment Notes
 
-- The API stores job metadata in `apps/api/data/jobs.db` (SQLite). Persist this file between deployments for idempotency.
+- The API stores job metadata in `apps/api/data/jobs.json`. Persist this file between deployments for idempotency.
 - Ensure the process has write access to the `data` directory. When using Docker the volume `api-data` handles persistence automatically.
 - Secrets must never be exposed client-side; the Next.js frontend should proxy actions through the API only.
 
