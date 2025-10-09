@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Simpro Quote Agent",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiBase}}/api/health",
+          "host": ["{{apiBase}}"],
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Dev Smoke: Create Quote",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Integrated Holdings Pty Ltd QA\",\n  \"email\": \"qa+quote@integrated-holdings.com.au\"\n}"
+        },
+        "url": {
+          "raw": "{{apiBase}}/api/dev/create-quote",
+          "host": ["{{apiBase}}"],
+          "path": ["api", "dev", "create-quote"]
+        }
+      }
+    },
+    {
+      "name": "Generate Quote (local)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "sample.pdf"
+            },
+            {
+              "key": "customerName",
+              "value": "Acme Holdings",
+              "type": "text"
+            },
+            {
+              "key": "customerEmail",
+              "value": "quotes@acme.com.au",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{apiBase}}/api/ingest",
+          "host": ["{{apiBase}}"],
+          "path": ["api", "ingest"]
+        }
+      }
+    },
+    {
+      "name": "Job Status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{apiBase}}/api/jobs/{{jobId}}",
+          "host": ["{{apiBase}}"],
+          "path": ["api", "jobs", "{{jobId}}"]
+        }
+      }
+    },
+    {
+      "name": "Retry Job",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{apiBase}}/api/retry/{{jobId}}",
+          "host": ["{{apiBase}}"],
+          "path": ["api", "retry", "{{jobId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "apiBase",
+      "value": "http://localhost:3000"
+    }
+  ]
+}

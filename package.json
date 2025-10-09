@@ -1,19 +1,17 @@
 {
-  "name": "plan2quote-api",
-  "version": "1.0.0",
-  "type": "module",
-  "engines": {
-    "node": ">=18.17 <23"
-  },
+  "name": "simpro-quote-agent",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Simpro Quote Agent monorepo",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "axios": "^1.7.2",
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "multer": "^1.4.5-lts.1",
-    "pdfkit": "^0.15.0",
-    "pdf-lib": "^1.17.1"
+    "build": "npm run build --workspace=apps/api",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "lint": "node -e \"console.log('lint skipped at root')\"",
+    "lint:fix": "npm run lint",
+    "test": "npm run test --workspace=apps/api"
   }
 }
